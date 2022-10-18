@@ -1451,3 +1451,69 @@ Caused by: java.net.SocketTimeoutException: Connect timed out
 2022-10-18 18:27:50.323 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 9800 (http) with context path '' 
 2022-10-18 18:27:50.333 [restartedMain] INFO  com.sk.signet.onm.OnmApplication - Started OnmApplication in 1.789 seconds (JVM running for 166.078) 
 2022-10-18 18:27:50.338 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged 
+2022-10-18 18:40:32.286 [Thread-7] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Shutdown initiated... 
+2022-10-18 18:40:32.329 [Thread-7] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Shutdown completed. 
+2022-10-18 18:40:32.442 [restartedMain] INFO  com.sk.signet.onm.OnmApplication - Starting OnmApplication using Java 15.0.1 on DESKTOP-2K0JJFQ with PID 63976 (D:\SKsignet\workspace\onm-ba\target\classes started by 허세환 in D:\SKsignet\workspace\onm-ba) 
+2022-10-18 18:40:32.442 [restartedMain] DEBUG com.sk.signet.onm.OnmApplication - Running with Spring Boot v2.6.3, Spring v5.3.15 
+2022-10-18 18:40:32.442 [restartedMain] INFO  com.sk.signet.onm.OnmApplication - The following profiles are active: local 
+2022-10-18 18:40:32.791 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 9800 (http) 
+2022-10-18 18:40:32.792 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-9800"] 
+2022-10-18 18:40:32.792 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat] 
+2022-10-18 18:40:32.792 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.56] 
+2022-10-18 18:40:32.820 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext 
+2022-10-18 18:40:32.820 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 376 ms 
+2022-10-18 18:40:32.885 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Starting... 
+2022-10-18 18:40:32.915 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Start completed. 
+2022-10-18 18:40:33.758 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729 
+2022-10-18 18:40:33.762 [restartedMain] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 14 endpoint(s) beneath base path '/actuator' 
+2022-10-18 18:40:33.790 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-9800"] 
+2022-10-18 18:40:33.792 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 9800 (http) with context path '' 
+2022-10-18 18:40:33.805 [restartedMain] INFO  com.sk.signet.onm.OnmApplication - Started OnmApplication in 1.397 seconds (JVM running for 929.55) 
+2022-10-18 18:40:33.808 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged 
+2022-10-18 18:40:58.200 [Thread-11] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Shutdown initiated... 
+2022-10-18 18:40:58.236 [Thread-11] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Shutdown completed. 
+2022-10-18 18:40:58.521 [restartedMain] INFO  com.sk.signet.onm.OnmApplication - Starting OnmApplication using Java 15.0.1 on DESKTOP-2K0JJFQ with PID 63976 (D:\SKsignet\workspace\onm-ba\target\classes started by 허세환 in D:\SKsignet\workspace\onm-ba) 
+2022-10-18 18:40:58.522 [restartedMain] DEBUG com.sk.signet.onm.OnmApplication - Running with Spring Boot v2.6.3, Spring v5.3.15 
+2022-10-18 18:40:58.522 [restartedMain] INFO  com.sk.signet.onm.OnmApplication - The following profiles are active: local 
+2022-10-18 18:40:59.110 [restartedMain] WARN  o.m.s.mapper.ClassPathMapperScanner - No MyBatis mapper was found in '[com.sk.signet.onm]' package. Please check your configuration. 
+2022-10-18 18:40:59.200 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 9800 (http) 
+2022-10-18 18:40:59.201 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-9800"] 
+2022-10-18 18:40:59.202 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat] 
+2022-10-18 18:40:59.202 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.56] 
+2022-10-18 18:40:59.278 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext 
+2022-10-18 18:40:59.278 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 752 ms 
+2022-10-18 18:41:00.787 [restartedMain] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'dataSource' defined in class path resource [org/springframework/boot/autoconfigure/jdbc/DataSourceConfiguration$Hikari.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.zaxxer.hikari.HikariDataSource]: Factory method 'dataSource' threw exception; nested exception is org.springframework.boot.autoconfigure.jdbc.DataSourceProperties$DataSourceBeanCreationException: Failed to determine a suitable driver class 
+2022-10-18 18:41:00.793 [restartedMain] INFO  o.a.catalina.core.StandardService - Stopping service [Tomcat] 
+2022-10-18 18:41:00.823 [restartedMain] INFO  o.s.b.a.l.ConditionEvaluationReportLoggingListener - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled. 
+2022-10-18 18:41:00.868 [restartedMain] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Failed to configure a DataSource: 'url' attribute is not specified and no embedded datasource could be configured.
+
+Reason: Failed to determine a suitable driver class
+
+
+Action:
+
+Consider the following:
+	If you want an embedded database (H2, HSQL or Derby), please put it on the classpath.
+	If you have database settings to be loaded from a particular profile you may need to activate it (the profiles local are currently active).
+ 
+2022-10-18 18:41:04.414 [restartedMain] INFO  com.sk.signet.onm.OnmApplication - Starting OnmApplication using Java 15.0.1 on DESKTOP-2K0JJFQ with PID 63976 (D:\SKsignet\workspace\onm-ba\target\classes started by 허세환 in D:\SKsignet\workspace\onm-ba) 
+2022-10-18 18:41:04.414 [restartedMain] DEBUG com.sk.signet.onm.OnmApplication - Running with Spring Boot v2.6.3, Spring v5.3.15 
+2022-10-18 18:41:04.414 [restartedMain] INFO  com.sk.signet.onm.OnmApplication - The following profiles are active: local 
+2022-10-18 18:41:05.227 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 9800 (http) 
+2022-10-18 18:41:05.229 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-9800"] 
+2022-10-18 18:41:05.229 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat] 
+2022-10-18 18:41:05.229 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.56] 
+2022-10-18 18:41:05.278 [restartedMain] INFO  o.a.c.c.C.[Tomcat-1].[localhost].[/] - Initializing Spring embedded WebApplicationContext 
+2022-10-18 18:41:05.278 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 860 ms 
+2022-10-18 18:41:05.445 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-4 - Starting... 
+2022-10-18 18:41:05.475 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-4 - Start completed. 
