@@ -23,3 +23,7 @@ management:
       enabled: true
     health:
       show-details: always
+
+jwt: 
+  secret: "sksignet_onm_service"
+  expiredTime: 3600000

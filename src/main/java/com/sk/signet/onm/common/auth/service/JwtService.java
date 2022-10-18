@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -23,8 +24,11 @@ import lombok.extern.slf4j.Slf4j;
 @Service("jwtService")
 public class JwtService {
 
-	private static final String SALT =  "sksignet_onm_service_token";
-	private static final Long expiredTime = 1000 * 60L * 30L;	// 30분
+	@Value("${jwt.secret}")
+	private String SECRET;
+	
+	@Value("${jwt.expiredTime}")
+	private Long expiredTime;	// millisecond
 
 	 
 	public <T> String create(String key, T data, String subject){
@@ -43,7 +47,7 @@ public class JwtService {
 	private byte[] generateKey(){
 		byte[] key = null;
 		try {
-			key = SALT.getBytes("UTF-8");
+			key = SECRET.getBytes("UTF-8");
 		} catch (UnsupportedEncodingException e) {
 			if(log.isInfoEnabled()){
 				e.printStackTrace();
@@ -114,7 +118,7 @@ public class JwtService {
 		
 		Jws<Claims> claims = null;
 		try {
-			claims = Jwts.parser().setSigningKey(SALT.getBytes("UTF-8")).parseClaimsJws(jwt);
+			claims = Jwts.parser().setSigningKey(SECRET.getBytes("UTF-8")).parseClaimsJws(jwt);
 		} catch (Exception e) {
 			if(log.isInfoEnabled()){
 				e.printStackTrace();
@@ -136,7 +140,7 @@ public class JwtService {
 	public Map<String, Object> csGet(String key,String jwt) {
 		Jws<Claims> claims = null;
 		try {
-			claims = Jwts.parser().setSigningKey(SALT.getBytes("UTF-8")).parseClaimsJws(jwt);
+			claims = Jwts.parser().setSigningKey(SECRET.getBytes("UTF-8")).parseClaimsJws(jwt);
 		} catch (Exception e) {
 			if(log.isInfoEnabled()){
 				e.printStackTrace();
