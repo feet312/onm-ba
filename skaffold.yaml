@@ -5,21 +5,19 @@ profiles:
     build:
       local:
         push: true # true: 서버 테스트 / false: 로컬 테스트
-      artifacts:
-        # - image: feet312/sample-api # on dev server
-        - image: docker-signet.sk.com/onm/onm-web 
+      artifacts: 
+        - image: registry.hub.docker.com/feet312/onm-ba 
           jib:
             args:
               - -DskipTests
               - "-Dgs ${maven_settings}"
               - "-Djib.container.environment=SPRING_PROFILES_ACTIVE=dev"
-            fromImage: docker-signet.sk.com/onm/cpos-jre-runtime:v1.0.0
+            fromImage: registry.hub.docker.com/feet312/onm-ba/cpos-jre-runtime:v1.0.0
   - name: stage
     build:
       local:
         push: true # true: 서버 테스트 / false: 로컬 테스트
-      artifacts:
-        # - image: feet312/sample-api # on dev server
+      artifacts: 
         - image: docker-signet.sk.com/onm/onm-web 
           jib:
             args:
@@ -30,11 +28,11 @@ profiles:
   - name: local
     build:
       local:
-        push: true # true: 서버 테스트 / false: 로컬 테스트
+        push: false # true: 서버 테스트 / false: 로컬 테스트
         useDockerCLI: true
       artifacts:
-        # - image: feet312/sample-api # on dev server
-        - image: docker-signet.sk.com/onm/onm-web 
+        - image: registry.hub.docker.com/feet312/onm-ba # on dev server
+#        - image: docker-signet.sk.com/onm/onm-web 
     deploy:
       kubectl:
         manifests:
@@ -43,7 +41,7 @@ profiles:
     portForward:
      - resourceType: Service
 #       resourceName: commonui-service
-       resourceName: onm-web
+       resourceName: onm-ba
        namespace: onm-app
        port: 8900
        localPort: 8900 # *Optional*

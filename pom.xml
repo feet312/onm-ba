@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.sk.signet</groupId>
-	<artifactId>onm-web</artifactId>
+	<artifactId>onm-ba</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>onm-web</name>
+	<name>onm-ba</name>
 	<description>SK Signet OnM System</description>
 	<properties>
 		<java.version>11</java.version>
