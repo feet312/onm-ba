@@ -6,13 +6,13 @@ profiles:
       local:
         push: true # true: 서버 테스트 / false: 로컬 테스트
       artifacts: 
-        - image: registry.hub.docker.com/feet312/onm-ba 
+        - image: feet312/onm-ba
+#        - image: onm-ba    # local
           jib:
             args:
               - -DskipTests
-              - "-Dgs ${maven_settings}"
               - "-Djib.container.environment=SPRING_PROFILES_ACTIVE=dev"
-            fromImage: registry.hub.docker.com/feet312/onm-ba/cpos-jre-runtime:v1.0.0
+            fromImage: openjdk:11.0.11-jre-slim
   - name: stage
     build:
       local:
@@ -23,7 +23,7 @@ profiles:
             args:
               - -DskipTests
               - "-Dgs ${maven_settings}"
-              - "-Djib.container.environment=SPRING_PROFILES_ACTIVE=dev"
+              - "-Djib.container.environment=SPRING_PROFILES_ACTIVE=stage"
             fromImage: docker-signet.sk.com/onm/onm-jre-runtime:v1.0.0
   - name: local
     build:
@@ -31,12 +31,12 @@ profiles:
         push: false # true: 서버 테스트 / false: 로컬 테스트
         useDockerCLI: true
       artifacts:
-        - image: registry.hub.docker.com/feet312/onm-ba # on dev server
+        - image: feet312/onm-ba # on dev server
 #        - image: docker-signet.sk.com/onm/onm-web 
     deploy:
       kubectl:
         manifests:
-          - k8s/dev/onm-web.yaml
+          - k8s/dev/onm-ba.yaml
           
     portForward:
      - resourceType: Service

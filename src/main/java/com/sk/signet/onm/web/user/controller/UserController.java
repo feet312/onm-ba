@@ -63,7 +63,7 @@ public class UserController {
 	
 	@GetMapping("/{userId}")
 	@Operation(summary = "사용자조회", description="ID로 사용자 조회", security = @SecurityRequirement(name="bearer"))
-	public ResponseEntity<Map<String, Object>> getUser2(@Parameter(name="userId", description="테스트ID : INSOFT1") @PathVariable String userId) {
+	public ResponseEntity<Map<String, Object>> getUser(@Parameter(name="userId", description="테스트ID : INSOFT1") @PathVariable String userId) {
 		Map<String, Object> searchInfo = new HashMap<>();
 		searchInfo.put("userId", userId);
 				
