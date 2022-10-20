@@ -42,6 +42,6 @@ profiles:
      - resourceType: Service
 #       resourceName: commonui-service
        resourceName: onm-ba
-       namespace: onm-app
+       namespace: onm-dev
        port: 8900
        localPort: 8900 # *Optional*
