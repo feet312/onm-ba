@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -122,8 +123,8 @@ public class JwtService {
 	
 	public Map<String, Object> get(String key) {
 		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
-		String jwt = request.getHeader("Authorization");
-		
+		String jwt = request.getHeader(HttpHeaders.AUTHORIZATION);
+				
 		Jws<Claims> claims = null;
 		try {
 			claims = Jwts.parser().setSigningKey(SECRET.getBytes("UTF-8")).parseClaimsJws(jwt);
