@@ -22,9 +22,7 @@ public interface UserMapper {
 	 * @param param
 	 * @return
 	 */
-	List<Map<String, Object>> selectUser(Map param);
-	
-	User selectUser2(Map param);
+	User selectUser(Map param);
 	
 	/**
 	 * 사용자정보 수정

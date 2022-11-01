@@ -6,13 +6,13 @@ server:
   port: 9800
 
 
-#appinfo
+## appinfo
 app-info: 
   build:
     version: '0.0.1-SNAPSHOT'
-    timestamp: '@app.build.timestamp@'
+    timestamp: '2022-10-26T04:15:26Z'
     
-#actuator
+## actuator
 management: 
   endpoints:
     web:
@@ -24,6 +24,37 @@ management:
     health:
       show-details: always
 
+## Interface API Infos (AS-IS)
+api: 
+  credit:  
+    nice:
+      url: 211.33.136.19:4457
+      header: 
+        merchantGId: 23933002201280000001  
+  alimtalk:  
+      sendurl: https://jupiter.lunasoft.co.kr/api/AlimTalk/message/send 
+      userid: homenservice
+      apikey: 81eh0c8a8anlamd996ikqbmvd06goledpz7llt9q
+     
+
+## FTP Infos (AS-IS)
+ftp: 
+  sendurl: 210.116.112.170
+  domainurl: https://hns.sksignet.com/fileserver
+  basepath: /data/upload
+  userid: root
+  passwd: cpos!@34
+   
+    
+
 jwt: 
   secret: "sksignet_onm_service"
   expiredTime: 3600000
+
+token: 
+  access-expired-time: 3600000
+  refresh-expired-time: 604800000
+  secret: "sksignet_onm_service"
+  refresh-token-name: refresh-token
+  access-token-name: access-token  
+  

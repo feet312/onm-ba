@@ -47,7 +47,7 @@ public class LoginController {
 				loginService.insertLoginHist(loginMap);
 				
 				// JWT 토큰 생성 
-				String token = jwtService.create("memberInfo", loginMap, "user");
+				String token = jwtService.create("data", loginMap, "user");
 				response.setHeader("Access-Control-Expose-Headers", "Authorization");
 				response.setHeader("Authorization", token);
 				rcvData.put("data","success");

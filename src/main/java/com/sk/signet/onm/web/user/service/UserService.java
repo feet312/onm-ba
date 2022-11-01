@@ -12,7 +12,7 @@ import com.sk.signet.onm.web.user.domain.User;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@Service("customerService")
+@Service("userService")
 @SuppressWarnings({ "unchecked", "rawtypes", "unused" })	
 public class UserService {
 
@@ -25,21 +25,16 @@ public class UserService {
 		return data;
 	}
 	
-	public List<Map<String, Object>> selectUser(Map<String, Object> searchInfo) {
-		List<Map<String, Object>> data = mapper.selectUser(searchInfo);
-		return data;
-	}
-	
-	public User selectUser2(Map<String, Object> searchInfo) {
-		User user = mapper.selectUser2(searchInfo);
+	public User selectUser(Map<String, Object> searchInfo) {
+		User user = mapper.selectUser(searchInfo);
 		return user;
 	}
 	
-	public List<Map<String, Object>> updateUser(Map<String, Object> userInfo) {
+	public User updateUser(Map<String, Object> userInfo) {
 		
 		int result = mapper.updateUser(userInfo);
 		log.debug("update result : "+ result);
-		List<Map<String, Object>> resultData = mapper.selectUser(userInfo);		
+		User resultData = mapper.selectUser(userInfo);		
 		
 		return resultData;
 	}

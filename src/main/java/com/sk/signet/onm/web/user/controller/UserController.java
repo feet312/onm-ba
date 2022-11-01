@@ -40,7 +40,6 @@ import lombok.extern.slf4j.Slf4j;
 
 @Tag(name="사용자", description="사용자 관련 API입니다.")
 @RestController
-@RequestMapping("/user")
 @RequiredArgsConstructor
 @Slf4j
 public class UserController {
@@ -48,7 +47,7 @@ public class UserController {
 	@Autowired
 	private UserService service;
 	
-	@GetMapping("/")
+	@GetMapping("/users")
 	@Operation(summary = "사용자 리스트 조회", description="사용자 리스트 조회(100건)")
     public ResponseEntity<Map<String, Object>> getUsers() {
 		
@@ -61,13 +60,13 @@ public class UserController {
     }
 	
 	
-	@GetMapping("/{userId}")
+	@GetMapping("/users/{userId}")
 	@Operation(summary = "사용자조회", description="ID로 사용자 조회", security = @SecurityRequirement(name="bearer"))
 	public ResponseEntity<Map<String, Object>> getUser(@Parameter(name="userId", description="테스트ID : INSOFT1") @PathVariable String userId) {
 		Map<String, Object> searchInfo = new HashMap<>();
 		searchInfo.put("userId", userId);
 				
-		User user = service.selectUser2(searchInfo);
+		User user = service.selectUser(searchInfo);
 		Map<String, Object> data = new HashMap<>();
 		data.put("data", user);
 		
@@ -75,7 +74,7 @@ public class UserController {
 	}
 	
 	
-	@PostMapping("/{userId}")
+	@PostMapping("/users/{userId}")
 	@Operation(summary = "사용자정보수정", description="사용자 정보수정")
 	public Map<String, Object> updateUser(@RequestBody Map<String, Object> paramMap) {
 		
@@ -87,7 +86,7 @@ public class UserController {
 			}
 		 */
 		
-		List<Map<String, Object>> result = service.updateUser(paramMap);
+		User result = service.updateUser(paramMap);
 		Map<String, Object> data = new HashMap<>();
 		data.put("data", result);
 		

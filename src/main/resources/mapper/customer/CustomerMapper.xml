@@ -1,0 +1,24 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sk.signet.onm.mapper.customer.CustomerMapper">
+	
+	<select id="selectCustomer" parameterType="map" resultType="com.sk.signet.onm.web.customer.domain.Customer">
+		SELECT * FROM TCSP_CUSTOMER
+		WHERE id = #{id}
+	</select>
+		
+	<select id="selectCustomerList" parameterType="map" resultType="com.sk.signet.onm.common.db.ResultMap">
+		SELECT * FROM TCSP_CUSTOMER LIMIT 100
+	</select>
+	
+	<update id="updateCustomer" parameterType="map" >
+		UPDATE TCSP_CUSTOMER 
+			<set>
+				<if test="customerName != null">customerName = #{customerName}, </if>
+				<if test="email != null">email = #{email}, </if>
+			</set>
+			<where>
+				id = #{id}
+			</where>
+	</update>
+</mapper>

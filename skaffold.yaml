@@ -40,7 +40,6 @@ profiles:
           
     portForward:
      - resourceType: Service
-#       resourceName: commonui-service
        resourceName: onm-ba
        namespace: onm-dev
        port: 8900

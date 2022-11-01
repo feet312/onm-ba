@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.6.3</version>
+		<version>2.6.6</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.sk.signet</groupId>
@@ -14,9 +14,23 @@
 	<name>onm-ba</name>
 	<description>SK Signet OnM System</description>
 	<properties>
+		<revision>0.0.1-snapshot</revision>
+		<app.build.timestamp>${maven.build.timestamp}</app.build.timestamp>
 		<java.version>11</java.version>
+		<spring-cloud.version>2021.0.0</spring-cloud.version>
 	</properties>
 	<dependencies>
+		<!-- Spring Cloud -->
+		<!-- <dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-gateway</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency> -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -88,7 +102,8 @@
 			<version>1.16</version>
 		</dependency> -->
 	</dependencies>
-	<!-- <dependencyManagement>
+	
+<!-- 	<dependencyManagement>
 		<dependencies>
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
