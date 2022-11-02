@@ -15,7 +15,7 @@ public interface UserMapper {
 	/**
 	 * 사용자정보 리스트 조회
 	 */
-	List<Map<String, Object>> selectUserList();
+//	List<Map<String, Object>> selectUserList();
 	
 	/**
 	 * 사용자정보 조회
@@ -30,4 +30,10 @@ public interface UserMapper {
 	 */
 	int updateUser(Map param);
 	
+	/**
+	 * 사용자 조회 
+	 * @param param
+	 * @return
+	 */
+	List<Map<String, Object>> selectUserList(Map param);
 }

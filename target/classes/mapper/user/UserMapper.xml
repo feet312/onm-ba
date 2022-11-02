@@ -7,11 +7,9 @@
 		WHERE userId = #{userId}
 	</select>
 	
-	
-	
-	<select id="selectUserList" parameterType="map" resultType="com.sk.signet.onm.common.db.ResultMap">
+	<!-- <select id="selectUserList" parameterType="map" resultType="com.sk.signet.onm.common.db.ResultMap">
 		SELECT * FROM TCO_USER LIMIT 100
-	</select>
+	</select> -->
 	
 	<update id="updateUser" parameterType="map" >
 		UPDATE TCO_USER 
@@ -23,4 +21,95 @@
 				userId = #{userId}
 			</where>
 	</update>
+	
+	
+	<select id="selectUserList" parameterType="map" resultType="com.sk.signet.onm.common.db.ResultMap">
+		/* com.sk.signet.onm.mapper.user.UserMapper.selectUserList */
+		<include refid="selectUserList_select" />
+		<include refid="selectUserList_from" />
+		<include refid="selectUserList_orderBy" />
+	</select>
+	
+	<sql id="selectUserList_select">
+		SELECT A.userId 
+			, A.userNm
+			, A.empNo
+			, A.deptCd
+			, B.deptNm
+			, CASE WHEN IFNULL(A.telNo, '') = '' THEN '' ELSE CONCAT(LEFT(A.telNo, 2),'-',MID(A.telNo, 3, LENGTH(A.telNo) - 6),'-',RIGHT(MID(A.telNo, 4, LENGTH(A.telNo)-3), 4)) END telNo
+			, CASE WHEN IFNULL(A.mobileNo, '') = '' THEN '' ELSE CONCAT(LEFT(A.mobileNo, 3),'-',MID(A.mobileNo, 4, LENGTH(A.mobileNo) - 7),'-',RIGHT(MID(A.mobileNo, 4, LENGTH(A.mobileNo)-3), 4)) END mobileNo
+			, A.email
+			, CASE	WHEN A.titleCd IS NULL OR A.titleCd = '' THEN ''
+					WHEN FN_GET_CODE_NM(A.companyId, 'DEPTRANK', A.titleCd , #{languageCd}) IS NOT NULL 
+						THEN FN_GET_CODE_NM(A.companyId, 'DEPTRANK', A.titleCd , #{languageCd}) 
+					ELSE A.titleCd 
+					END AS titleNm
+			, A.appleId
+			, A.techId
+			, A.deskNo
+			, A.useYn
+			, A.companyId
+			, C.name as companyNm, C.bizTypeCd
+			, FN_GET_CODE_NM(A.companyId, 'BIZTYPE', C.bizTypeCd, #{languageCd}) as bizTypeNm
+			, DATE_FORMAT(A.regDt, "%Y-%m-%d") AS joinDt
+			, DATE_FORMAT(A.withdrawalDate, "%Y-%m-%d") AS withdrawalDt
+	</sql>
+	
+	<sql id="selectUserList_from">
+		FROM TCO_USER A
+		 	LEFT OUTER JOIN TCO_DEPT B
+		 		ON  B.companyId = A.companyId
+		 		AND B.deptCd = A.deptCd
+		 	INNER JOIN TCSP_SERVICE_COMPANY C 
+		 		ON  C.id = A.companyId
+ 		<where>
+  			1=1
+  			<if test="useYnSearch != null and useYnSearch != ''">   	
+				AND A.useYn  = #{useYnSearch}
+			</if>
+  			<if test="searchDeptCd != null and searchDeptCd != ''">   	
+				AND B.deptCd  = #{searchDeptCd}
+			</if>
+  			<if test="bizTypeCdSearch != null and bizTypeCdSearch != ''">   	
+				AND C.bizTypeCd  = #{bizTypeCdSearch}
+			</if>
+  			<if test="searchServiceCompanySearch != null and searchServiceCompanySearch != ''">   	
+				AND A.companyId  = #{searchServiceCompanySearch}
+			</if>
+			<if test="searchGubun != null and searchGubun == 'userId'">
+		    	AND A.userId LIKE CONCAT('%', #{searchText}, '%')
+	    	</if>
+			<if test="searchGubun != null and searchGubun == 'userNm'">
+		    	AND A.userNm LIKE CONCAT('%', #{searchText}, '%')
+	    	</if>
+			<if test="searchGubun != null and searchGubun == 'telNo'">
+		    	AND A.telNo LIKE CONCAT('%', #{searchText}, '%')
+	    	</if>
+			<if test="searchGubun != null and searchGubun == 'mobileNo'">
+		    	AND A.mobileNo LIKE CONCAT('%', #{searchText}, '%')
+	    	</if>
+			<if test="searchGubun != null and searchGubun == 'email'">
+		    	AND A.email LIKE CONCAT('%', #{searchText}, '%')
+	    	</if>
+			<if test="searchGubun != null and searchGubun == 'titleNm'">
+		    	AND  (FN_GET_CODE_NM(A.companyId, 'DEPTRANK', A.titleCd , #{languageCd})   LIKE  CONCAT('%', #{searchText}, '%')
+		    		OR A.titleCd LIKE  CONCAT('%', #{searchText}, '%') )
+	    	</if>
+	    	<if test="regDtSt != null and regDtEnd != null and regDtSt != '' and regDtEnd != ''">
+		   <![CDATA[AND A.modDt >= STR_TO_DATE(#{regDtSt}, '%Y%m%d %H%i%s')]]>
+		   <![CDATA[AND A.modDt <= STR_TO_DATE(CONCAT(#{regDtEnd}, '235959'), '%Y%m%d%H%i%s')]]>
+	    	</if>
+			<if test="regDtSt != null and regDtEnd != null and regDtSt != '' and regDtEnd == ''">
+		   <![CDATA[AND A.modDt >= STR_TO_DATE(#{regDtSt}, '%Y%m%d %H%i%s')]]>
+	    	</if>
+	    	<if test="regDtSt != null and regDtEnd != null and regDtSt == '' and regDtEnd != ''">
+		   <![CDATA[AND A.modDt <= STR_TO_DATE(CONCAT(#{regDtEnd}, '235959'), '%Y%m%d%H%i%s')]]>
+	    	</if>
+ 		</where>
+	</sql>
+	
+	<sql id="selectUserList_orderBy">
+		ORDER BY A.regDt DESC, A.userId
+	</sql>
+	
 </mapper>

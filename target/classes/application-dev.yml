@@ -10,7 +10,7 @@ server:
 app-info: 
   build:
     version: '0.0.1-SNAPSHOT'
-    timestamp: '2022-10-26T04:15:26Z'
+    timestamp: '2022-11-02T01:17:35Z'
     
 #actuator
 management: 

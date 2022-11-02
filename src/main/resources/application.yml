@@ -18,8 +18,11 @@ spring:
       
 
 mybatis: 
-  mapper-locations: /mapper/**/*.xml
-  type-aliases-package: com.sk.signet.onm.common.db.ResultMap
+  mapper-locations: 
+    - classpath:/mapper/*Mapper.xml
+    - classpath:/mapper/**/*.xml
+  type-aliases-package: java.util.HashMap, java.util.List, com.sk.signet.onm.common.db.ResultMap
+  
     
 springdoc:
   version: '@project.version@'
