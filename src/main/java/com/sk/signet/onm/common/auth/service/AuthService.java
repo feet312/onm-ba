@@ -24,7 +24,13 @@ public class AuthService {
     @Autowired
     private JwtService jwtService;
     
-    
+    /**
+     * OpenFeign 으로 JWTToken 사용자 검증 
+     * @param reqBody
+     * @param req
+     * @param res
+     * @return
+     */
     public Map<String, Object> userAuthCheck(Map<String, Object> reqBody, HttpServletRequest req, HttpServletResponse res) {
         Map<String, Object> data = new HashMap<String, Object>();
         
@@ -43,7 +49,13 @@ public class AuthService {
         return data;
     }
     
-    
+    /**
+     * 사용자 인증 여부 확인 
+     * @param reqBody
+     * @param req
+     * @param res
+     * @return
+     */
     public boolean isAuthenticated(Map<String, Object> reqBody, HttpServletRequest req, HttpServletResponse res) {
         boolean isAuth = false;
         try {
