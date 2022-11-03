@@ -39,7 +39,7 @@
 	</appender>
 -->
 	
-	<logger name="org.springframework" level="INFO" additivity="false">
+	<logger name="org.springframework" level="debug" additivity="false">
 		<appender-ref ref="stdout" />
 	</logger>
 

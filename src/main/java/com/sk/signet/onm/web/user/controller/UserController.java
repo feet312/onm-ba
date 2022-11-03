@@ -32,6 +32,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sk.signet.onm.common.auth.service.AuthFeignClient;
+import com.sk.signet.onm.common.auth.service.AuthService;
 import com.sk.signet.onm.web.user.domain.User;
 import com.sk.signet.onm.web.user.service.UserService;
 
@@ -51,6 +53,9 @@ public class UserController {
 	@Autowired
 	private UserService service;
 	
+	@Autowired
+	private AuthService authService;
+	
 	@GetMapping("/users")
 	@Operation(summary = "사용자 리스트 조회", description="사용자 리스트 조회(100건)")
     public ResponseEntity<Map<String, Object>> getUsers() {
@@ -65,15 +70,28 @@ public class UserController {
     }
 	
 	
+	@Autowired
+    private static AuthFeignClient authFeignClient;
+	
 	@GetMapping("/users/{userId}")
 	@Operation(summary = "사용자조회", description="ID로 사용자 조회")
-	public ResponseEntity<Map<String, Object>> getUser(@Parameter(name="userId", description="테스트ID : INSOFT1") @PathVariable String userId) {
-		Map<String, Object> searchInfo = new HashMap<>();
+	public ResponseEntity<Map<String, Object>> getUser(@Parameter(name="userId", description="테스트ID : INSOFT1") @PathVariable String userId, HttpServletRequest req) {
+	    
+	    Map<String, Object> searchInfo = new HashMap<>();
+	    Map<String, Object> data = new HashMap<>();
 		searchInfo.put("userId", userId);
-				
-		User user = service.selectUser(searchInfo);
-		Map<String, Object> data = new HashMap<>();
-		data.put("data", user);
+		
+		
+		boolean isAuth = authService.isAuthenticated(searchInfo, req);
+		
+		if(isAuth) {
+		    User user = service.selectUser(searchInfo);
+	        data.put("data", user);
+		} else {
+		    log.debug("authInfo : {}", data);
+		    data.put("data", "fail");
+            return new ResponseEntity<Map<String, Object>>(data, HttpStatus.UNAUTHORIZED);
+		}
 		
 		return new ResponseEntity<Map<String, Object>>(data, HttpStatus.OK);
 	}

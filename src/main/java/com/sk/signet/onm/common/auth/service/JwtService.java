@@ -4,6 +4,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -118,6 +119,14 @@ public class JwtService {
 			 * return false;*/
 			 
 		}
+	}
+	
+	public String getToken(HttpServletRequest req) {
+	    String token = req.getHeader(HttpHeaders.AUTHORIZATION);
+	    if(Pattern.matches("^Bearer .*", token)) {
+            token = token.replaceAll("^Bearer( )*", "");
+        }
+	    return token;  
 	}
 		
 	

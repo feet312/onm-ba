@@ -23,6 +23,12 @@ management:
       enabled: true
     health:
       show-details: always
+      
+feign: 
+  api: 
+    auth: 
+      name: onm-auth
+      url: http://onm-auth.sksignet.com:8800
 
 ## Interface API Infos (AS-IS)
 api: 

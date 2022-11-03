@@ -50,3 +50,12 @@ openapi:
     name: "Apache License Version 2.0"
     url: "http://www.apache.org/licenses/LICENSE-2.0"
 
+
+feign:
+  client: 
+    config:
+      default:
+        logger-level: full
+        connectTimeout: 5000 # feign의 전역 timeout 설정 : 5초
+        readTimeout: 5000
+        loggerLevel: FULL ##basic
