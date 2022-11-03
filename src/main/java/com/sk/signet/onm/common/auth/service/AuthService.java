@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -24,15 +25,17 @@ public class AuthService {
     private JwtService jwtService;
     
     
-    public Map<String, Object> userAuthCheck(Map<String, Object> reqBody, HttpServletRequest req) {
+    public Map<String, Object> userAuthCheck(Map<String, Object> reqBody, HttpServletRequest req, HttpServletResponse res) {
         Map<String, Object> data = new HashMap<String, Object>();
         
         try {
-            String token = jwtService.getToken(req);
             
-            log.info("AuthService reqBody : {}", reqBody);
+            String token = jwtService.getToken(req);            
             data = authFeignClient.userAuthCheck(token, reqBody);
-            log.info("AuthService result : {}", data);
+            
+            String newToken=jwtService.refreshToken(token);            
+            res.setHeader("Access-Control-Expose-Headers", HttpHeaders.AUTHORIZATION);
+            res.setHeader(HttpHeaders.AUTHORIZATION, newToken); //요청 웹브라우즈에 새로 생성한 token 되돌려줌.
         } catch (Exception e) {
             // TODO: handle exception
             log.error(e.getMessage());
@@ -41,12 +44,12 @@ public class AuthService {
     }
     
     
-    public boolean isAuthenticated(Map<String, Object> reqBody, HttpServletRequest req) {
+    public boolean isAuthenticated(Map<String, Object> reqBody, HttpServletRequest req, HttpServletResponse res) {
         boolean isAuth = false;
         try {
             
             Map<String, Object> data = new HashMap<String, Object>();            
-            data = this.userAuthCheck(reqBody, req);
+            data = this.userAuthCheck(reqBody, req, res);
             
             if(null != data) {
                 if(data.get("data").equals("success")) {

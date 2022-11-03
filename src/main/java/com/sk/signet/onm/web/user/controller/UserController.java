@@ -75,16 +75,13 @@ public class UserController {
 	
 	@GetMapping("/users/{userId}")
 	@Operation(summary = "사용자조회", description="ID로 사용자 조회")
-	public ResponseEntity<Map<String, Object>> getUser(@Parameter(name="userId", description="테스트ID : INSOFT1") @PathVariable String userId, HttpServletRequest req) {
+	public ResponseEntity<Map<String, Object>> getUser(@Parameter(name="userId", description="테스트ID : INSOFT1") @PathVariable String userId, HttpServletRequest req, HttpServletResponse res) {
 	    
 	    Map<String, Object> searchInfo = new HashMap<>();
 	    Map<String, Object> data = new HashMap<>();
 		searchInfo.put("userId", userId);
 		
-		
-		boolean isAuth = authService.isAuthenticated(searchInfo, req);
-		
-		if(isAuth) {
+		if(authService.isAuthenticated(searchInfo, req, res)) {
 		    User user = service.selectUser(searchInfo);
 	        data.put("data", user);
 		} else {
