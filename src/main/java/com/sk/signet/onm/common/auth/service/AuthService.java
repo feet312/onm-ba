@@ -14,6 +14,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * 토큰 인증/검증을 하기위한 Feign 서비스 
+ * @packagename : com.sk.signet.onm.common.auth.service
+ * @filename 	: AuthService.java 
+ * @since 		: 2022.11.04 
+ * @description : 
+ * =================================================================
+ * Date				Author			Version			Note			
+ * -----------------------------------------------------------------
+ * 2022.11.04 		Heo, Sehwan		1.0				최초 생성
+ * -----------------------------------------------------------------
+ */
 @Slf4j
 @Service
 public class AuthService {
