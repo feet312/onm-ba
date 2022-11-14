@@ -81,18 +81,31 @@ public class UserController {
 	    Map<String, Object> data = new HashMap<>();
 		searchInfo.put("userId", userId);
 		
-		if(authService.isAuthenticated(searchInfo, req, res)) {
-		    User user = service.selectUser(searchInfo);
-	        data.put("data", user);
-		} else {
-		    log.debug("authInfo : {}", data);
-		    data.put("data", "fail");
-            return new ResponseEntity<Map<String, Object>>(data, HttpStatus.UNAUTHORIZED);
-		}
+	    User user = service.selectUser(searchInfo);
+        data.put("data", user);
 		
 		return new ResponseEntity<Map<String, Object>>(data, HttpStatus.OK);
 	}
 	
+	@GetMapping("/users/auth/{userId}")
+    @Operation(summary = "사용자조회(+토큰검증)", description="ID로 사용자 조회 시 토큰 검증포함")
+    public ResponseEntity<Map<String, Object>> getUserWithAuthCheck(@Parameter(name="userId", description="테스트ID : INSOFT1") @PathVariable String userId, HttpServletRequest req, HttpServletResponse res) {
+        
+        Map<String, Object> searchInfo = new HashMap<>();
+        Map<String, Object> data = new HashMap<>();
+        searchInfo.put("userId", userId);
+        
+        if(authService.isAuthenticated(searchInfo, req, res)) {
+            User user = service.selectUser(searchInfo);
+            data.put("data", user);
+        } else {
+            log.debug("authInfo : {}", data);
+            data.put("data", "fail");
+            return new ResponseEntity<Map<String, Object>>(data, HttpStatus.UNAUTHORIZED);
+        }
+        
+        return new ResponseEntity<Map<String, Object>>(data, HttpStatus.OK);
+    }
 	
 	@PostMapping("/users/{userId}")
 	@Operation(summary = "사용자정보수정", description="사용자 정보수정")

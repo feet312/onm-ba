@@ -8,10 +8,9 @@ spring:
   datasource: 
     hikari:
       driver-class-name: org.mariadb.jdbc.Driver
-      jdbc-url: "jdbc:mariadb://10.10.10.163:3306/signetCpos?useSSL=false&amp;serverTimezone=UTC&amp;autoReconnection=true"  # prod
-#      jdbc-url: "jdbc:mariadb://210.116.112.170:3306/signetCpos?useSSL=false&amp;serverTimezone=UTC&amp;autoReconnection=true"   # dev
-      username: cpos
-      password: cpos!@34
+      jdbc-url: ENC(4mKDyl6vRkWi6hjpCWB36Cv+1WELaIIxf7000c7PynSzU3PkJG8mLr76ydp7zPlzu1DJ4rtQqCTkMTCWHbDfiZ7d3N6lHbBYrsdBQNaI9Qj3Z744VJoM048ynOgB41ylz8zYV2V/0OCEufkDjjUnf1ODhRSq4bTp)  # prod
+      username: ENC(veYh7ARI5EhE8/f+X2TBYA==)
+      password: ENC(SFf/vt7ZT0dlZPZc4Zpoykc15LU0ipln)
       connection-timeout: 5000
       validation-timeout: 1000
       maximum-pool-size: 10
@@ -59,3 +58,8 @@ feign:
         connectTimeout: 5000 # feign의 전역 timeout 설정 : 5초
         readTimeout: 5000
         loggerLevel: FULL ##basic
+
+jasypt: 
+  encryptor: 
+    bean: encryptorBean
+    password: sksignet_onm_jasypt
