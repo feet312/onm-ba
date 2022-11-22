@@ -15,7 +15,8 @@ public class TestCrypt {
         pbeEnc.setAlgorithm("PBEWithMD5AndTripleDES");
         pbeEnc.setPassword("sksignet_onm_jasypt");
 
-        String enc1 = pbeEnc.encrypt("jdbc:mariadb://10.10.10.163:3306/signetCpos?useSSL=false&amp;serverTimezone=UTC&amp;autoReconnection=true");
+//        String enc1 = pbeEnc.encrypt("jdbc:mariadb://10.10.10.163:3306/signetCpos?useSSL=false&amp;serverTimezone=UTC&amp;autoReconnection=true");
+        String enc1 = pbeEnc.encrypt("jdbc:mariadb://210.116.112.171:33306/signetCpos?useSSL=false&amp;serverTimezone=UTC&amp;autoReconnection=true");        
         String enc2 = pbeEnc.encrypt("cpos");
         String enc3 = pbeEnc.encrypt("cpos!@34");
         System.out.println("enc1 = " + enc1);

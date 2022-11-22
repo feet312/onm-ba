@@ -4,6 +4,18 @@
 
 server:
   port: 9800
+  forward-headers-strategy: framework
+  
+spring: 
+  datasource: 
+    hikari:
+      driver-class-name: org.mariadb.jdbc.Driver
+      jdbc-url: ENC(8ePNsf2H5S3VYxy8L5eju8m/YvGEHDOhTRi8XzDDzVzgpTSN2jO4ZxSUhjux2oJGYobLSxvmlW03Ys2VBeeoGiBHXne+CfH6Ld5j+pcut4Ec55pxA2ZfD1tTdbXRFvthJZZ5QNGXfiZwccuM6J6x3mvuZ9gYHQQe)  # dev
+      username: ENC(veYh7ARI5EhE8/f+X2TBYA==)
+      password: ENC(SFf/vt7ZT0dlZPZc4Zpoykc15LU0ipln)
+      connection-timeout: 5000
+      validation-timeout: 1000
+      maximum-pool-size: 10
 
 
 ## appinfo

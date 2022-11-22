@@ -1,19 +1,21 @@
+
+  
 spring:
   application:
-    name: onm-web
+    name: onm-ba
   profiles:
     active: local
   banner: 
     location: "classpath:app-banner.txt"
-  datasource: 
-    hikari:
-      driver-class-name: org.mariadb.jdbc.Driver
-      jdbc-url: ENC(4mKDyl6vRkWi6hjpCWB36Cv+1WELaIIxf7000c7PynSzU3PkJG8mLr76ydp7zPlzu1DJ4rtQqCTkMTCWHbDfiZ7d3N6lHbBYrsdBQNaI9Qj3Z744VJoM048ynOgB41ylz8zYV2V/0OCEufkDjjUnf1ODhRSq4bTp)  # prod
-      username: ENC(veYh7ARI5EhE8/f+X2TBYA==)
-      password: ENC(SFf/vt7ZT0dlZPZc4Zpoykc15LU0ipln)
-      connection-timeout: 5000
-      validation-timeout: 1000
-      maximum-pool-size: 10
+#  datasource: 
+#    hikari:
+#      driver-class-name: org.mariadb.jdbc.Driver
+#      jdbc-url: ENC(4mKDyl6vRkWi6hjpCWB36Cv+1WELaIIxf7000c7PynSzU3PkJG8mLr76ydp7zPlzu1DJ4rtQqCTkMTCWHbDfiZ7d3N6lHbBYrsdBQNaI9Qj3Z744VJoM048ynOgB41ylz8zYV2V/0OCEufkDjjUnf1ODhRSq4bTp)  # prod
+#      username: ENC(veYh7ARI5EhE8/f+X2TBYA==)
+#      password: ENC(SFf/vt7ZT0dlZPZc4Zpoykc15LU0ipln)
+#      connection-timeout: 5000
+#      validation-timeout: 1000
+#      maximum-pool-size: 10
       
 
 mybatis: 
