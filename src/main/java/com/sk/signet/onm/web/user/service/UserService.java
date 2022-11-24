@@ -46,6 +46,20 @@ public class UserService {
 	}
 	
 	/**
+	 * 사용자 정보 등록 
+	 * @param userInfo
+	 * @return
+	 */
+	public User insertUser(Map<String, Object> userInfo) {
+        
+        int result = userMapper.insertUser(userInfo);
+        log.debug("insert result : "+ result);
+        User resultData = userMapper.selectUser(userInfo);      
+        
+        return resultData;
+    }
+	
+	/**
 	 * 사용자 정보 수정
 	 * @param userInfo
 	 * @return

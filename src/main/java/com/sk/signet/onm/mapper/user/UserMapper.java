@@ -25,6 +25,13 @@ public interface UserMapper {
 	User selectUser(Map param);
 	
 	/**
+	 * 사용자정보 등록
+	 * @param param
+	 * @return
+	 */
+	int insertUser(Map param);
+	
+	/**
 	 * 사용자정보 수정
 	 * @param param
 	 */

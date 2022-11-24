@@ -27,6 +27,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -107,24 +108,55 @@ public class UserController {
         return new ResponseEntity<Map<String, Object>>(data, HttpStatus.OK);
     }
 	
-	@PostMapping("/users/{userId}")
-	@Operation(summary = "사용자정보수정", description="사용자 정보수정")
-	public Map<String, Object> updateUser(@RequestBody Map<String, Object> paramMap) {
-		
+	@PostMapping("/users/")
+	@Operation(summary = "사용자정보등록", description="사용자 정보등록")
+	public Map<String, Object> createUser(@RequestBody Map<String, Object> paramMap) {
+	    
 		/**
 		 * TEST Data
 		 * {
-			  "userId": "INSOFT1",
-			  "email": "jongmo.jeon@signet.com"
+			  "companyId": "16",
+			  "userId": "INSOFT9",
+			  "userNm": "홍길동",
+			  "userPassword": "InSOFT9!@#$",
+			  "useYn":"Y",
+			  "authId":"99",
+			  "email": "kildong.hong@signet.com"
 			}
 		 */
 		
-		User result = service.updateUser(paramMap);
+		User result = service.insertUser(paramMap);
 		Map<String, Object> data = new HashMap<>();
 		data.put("data", result);
 		
 		return data;
 	}
+	
+	@PutMapping("/users/{userId}")
+    @Operation(summary = "사용자정보수정", description="사용자 정보수정")
+    public Map<String, Object> updateUser(@RequestBody Map<String, Object> paramMap, @Parameter(name="userId", description="테스트ID : INSOFT1") @PathVariable String userId) {
+                
+        log.debug("path  Userid : {} ", userId);
+        log.debug("input  Userid : {}", paramMap.get("userId"));
+        
+        paramMap.put("userId", userId);
+        
+        log.debug("input  Userid-2 : {}", paramMap.get("userId"));
+        
+        /**
+         * TEST Data
+         * {
+              "userId": "INSOFT1",
+              "email": "jongmo.jeon@signet.com"
+            }
+         */
+        
+        User result = service.updateUser(paramMap);
+        Map<String, Object> data = new HashMap<>();
+        data.put("data", result);
+        
+        return data;
+    }
 	
 	
 	@GetMapping("/users/excel")

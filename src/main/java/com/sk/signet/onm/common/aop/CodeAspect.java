@@ -88,14 +88,20 @@ public class CodeAspect {
         Map<String, Object> data = (Map<String, Object>) returnObj.getBody();
         
         int status = returnObj.getStatusCodeValue();
-        String retCode = null;
+        int retCode = 1000;
+        data.put("message", "");
         
         if(status == 200) {
-            retCode = "1000";
+            retCode = 1000;
+        } else if(status == 400){
+            retCode = 5100;
+            data.put("message", data.get("error"));
         } else if(status == 404){
-            retCode = "4400";
+            retCode = 4400;
+            data.put("message", data.get("error"));
         } else {
-            retCode = "9999";
+            retCode = 9999;
+            data.put("message", data.get("error"));
         }
         
         data.put("status", status);

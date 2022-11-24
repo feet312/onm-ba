@@ -11,6 +11,83 @@
 		SELECT * FROM TCO_USER LIMIT 100
 	</select> -->
 	
+	<insert id="insertUser" parameterType="map">
+		INSERT INTO TCO_USER (
+			  companyId
+			, userId
+			, userNm
+			, empNo
+			, userPassword
+			, deptCd
+			, useYn
+			, authId
+			, email
+			, appleId
+			, deskNo
+			, techId
+			, titleCd
+			, mobileNo
+			, telNo
+			, gridRowCd
+			, receiverAlramYn
+			, ipSecurityYn
+			, memo
+			, regUserId
+			, regDt
+			, modUserId
+			, modDt ) 
+		VALUES ( 
+			  #{companyId}
+			, #{userId}
+			, #{userNm}
+			, #{empNo}
+			, password(#{userPassword})
+			, #{deptCd}
+			, #{useYn}
+			, #{authId}
+			, #{email}
+			, #{appleId}
+			, #{deskNo}
+			, #{techId}
+			, #{titleCd}
+			, #{mobileNo}
+			, #{telNo}
+			, #{gridRowCd}
+			, #{receiverAlramYn}
+			, #{ipSecurityYn}
+			, #{memo}
+			, #{sessionUserId}
+			, CONVERT_TZ(now(), '+00:00', IFNULL(#{timeDiff}, '+00:00'))
+			, #{sessionUserId}
+			, CONVERT_TZ(now(), '+00:00', IFNULL(#{timeDiff}, '+00:00'))
+		   ) ON DUPLICATE KEY 
+		UPDATE userNm = #{userNm}
+			<if test="userPassword != null and userPassword != ''">
+			, userPassword = password(#{userPassword})
+			</if>
+			, deptCd     = #{deptCd}
+			, useYn      = #{useYn}
+			, email      = #{email}
+			, appleId    = #{appleId}
+			, deskNo     = #{deskNo}
+			, techId     = #{techId}
+			, titleCd    = #{titleCd}
+			, mobileNo   = #{mobileNo}
+			, telNo      = #{telNo}
+			, gridRowCd  = #{gridRowCd}
+			<if test="authId != null and authId != ''">
+			, authId 	 = #{authId}
+			</if>
+			, receiverAlramYn  = #{receiverAlramYn}
+			, ipSecurityYn     = #{ipSecurityYn}
+			<if test='useYn != null and useYn == "N"'>
+			, withdrawalDate = CONVERT_TZ(now(), '+00:00', IFNULL(#{timeDiff}, '+00:00'))
+			</if>
+			, memo	           = #{memo}
+			, modUserId        = #{sessionUserId}
+			, modDt            = CONVERT_TZ(now(), '+00:00', IFNULL(#{timeDiff}, '+00:00'))
+	</insert>
+	
 	<update id="updateUser" parameterType="map" >
 		UPDATE TCO_USER 
 			<set>
