@@ -23,8 +23,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -40,6 +42,9 @@ import com.sk.signet.onm.web.user.service.UserService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -49,6 +54,7 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
+@RequestMapping("/users")
 public class UserController {
 	
 	@Autowired
@@ -57,7 +63,7 @@ public class UserController {
 	@Autowired
 	private AuthService authService;
 	
-	@GetMapping("/users")
+	@GetMapping("/list")
 	@Operation(summary = "사용자 리스트 조회", description="사용자 리스트 조회(100건)")
     public ResponseEntity<Map<String, Object>> getUsers() {
 		
@@ -74,9 +80,11 @@ public class UserController {
 	@Autowired
     private static AuthFeignClient authFeignClient;
 	
-	@GetMapping("/users/{userId}")
+	@GetMapping("/{userId}")
 	@Operation(summary = "사용자조회", description="ID로 사용자 조회")
-	public ResponseEntity<Map<String, Object>> getUser(@Parameter(name="userId", description="테스트ID : INSOFT1") @PathVariable String userId, HttpServletRequest req, HttpServletResponse res) {
+	public ResponseEntity<Map<String, Object>> getUser(
+	        @Parameter(name="userId", description="테스트ID : INSOFT1") @PathVariable String userId, 
+	        HttpServletRequest req, HttpServletResponse res) {
 	    
 	    Map<String, Object> searchInfo = new HashMap<>();
 	    Map<String, Object> data = new HashMap<>();
@@ -88,9 +96,11 @@ public class UserController {
 		return new ResponseEntity<Map<String, Object>>(data, HttpStatus.OK);
 	}
 	
-	@GetMapping("/users/auth/{userId}")
+	@GetMapping("/auth/{userId}")
     @Operation(summary = "사용자조회(+토큰검증)", description="ID로 사용자 조회 시 토큰 검증포함")
-    public ResponseEntity<Map<String, Object>> getUserWithAuthCheck(@Parameter(name="userId", description="테스트ID : INSOFT1") @PathVariable String userId, HttpServletRequest req, HttpServletResponse res) {
+    public ResponseEntity<Map<String, Object>> getUserWithAuthCheck(
+            @Parameter(name="userId", description="테스트ID : INSOFT1") @PathVariable String userId, 
+            HttpServletRequest req, HttpServletResponse res) {
         
         Map<String, Object> searchInfo = new HashMap<>();
         Map<String, Object> data = new HashMap<>();
@@ -108,9 +118,19 @@ public class UserController {
         return new ResponseEntity<Map<String, Object>>(data, HttpStatus.OK);
     }
 	
-	@PostMapping("/users/")
-	@Operation(summary = "사용자정보등록", description="사용자 정보등록")
-	public Map<String, Object> createUser(@RequestBody Map<String, Object> paramMap) {
+	@PostMapping("/create")
+	@Operation(summary = "사용자 정보 추가 등록", 
+	            description="신규 사용자 정보를 추가로 등록한다.",
+	            responses = {
+	                    @ApiResponse(responseCode="200",
+	                            description="사용자 추가 등록 성공시 결과 예시",
+	                            content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
+	                            schema = @Schema(implementation = User.class)))
+	            }
+	)
+	public ResponseEntity<Map<String, Object>> createUser(
+	        @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "사용자 정보입력", content = @Content(schema = @Schema(implementation = User.class)), required = true)
+	        @RequestBody Map<String, Object> paramMap) {
 	    
 		/**
 		 * TEST Data
@@ -128,20 +148,17 @@ public class UserController {
 		User result = service.insertUser(paramMap);
 		Map<String, Object> data = new HashMap<>();
 		data.put("data", result);
-		
-		return data;
+				
+		return new ResponseEntity<Map<String, Object>>(data, HttpStatus.OK);
 	}
 	
-	@PutMapping("/users/{userId}")
+	@PatchMapping("/update")
     @Operation(summary = "사용자정보수정", description="사용자 정보수정")
-    public Map<String, Object> updateUser(@RequestBody Map<String, Object> paramMap, @Parameter(name="userId", description="테스트ID : INSOFT1") @PathVariable String userId) {
+    public ResponseEntity<Map<String, Object>> updateUser(
+            @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "사용자 정보", content = @Content(schema = @Schema(implementation = User.class)), required = true)
+            @RequestBody Map<String, Object> paramMap) {
                 
-        log.debug("path  Userid : {} ", userId);
         log.debug("input  Userid : {}", paramMap.get("userId"));
-        
-        paramMap.put("userId", userId);
-        
-        log.debug("input  Userid-2 : {}", paramMap.get("userId"));
         
         /**
          * TEST Data
@@ -155,11 +172,11 @@ public class UserController {
         Map<String, Object> data = new HashMap<>();
         data.put("data", result);
         
-        return data;
+        return new ResponseEntity<Map<String, Object>>(data, HttpStatus.OK);
     }
 	
 	
-	@GetMapping("/users/excel")
+	@GetMapping("/excel")
     @Operation(summary = "사용자 엑셀다운로드", description="사용자 엑셀다운로드")
 //	public ResponseEntity<Map<String, Object>> getUserExcelDown(@RequestParam Map<String, Object> paramMap, HttpServletRequest req, HttpServletResponse res) throws Exception {
 	public void getUserExcelDown(@RequestParam Map<String, Object> paramMap, HttpServletRequest req, HttpServletResponse res) throws Exception {

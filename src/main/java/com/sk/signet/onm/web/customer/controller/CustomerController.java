@@ -29,12 +29,13 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
+@RequestMapping("/customers")
 public class CustomerController {
 
     @Autowired
     private CustomerService service;
     
-    @GetMapping("/customers")
+    @GetMapping("/list")
     @Operation(summary = "고객 리스트 조회", description="고객 리스트 조회(100건)")
     public ResponseEntity<Map<String, Object>> getCustomers() {
         
@@ -47,7 +48,7 @@ public class CustomerController {
     }
     
     
-    @GetMapping("/customers/{id}")
+    @GetMapping("/{id}")
     @Operation(summary = "고객조회", description="ID로 고객 조회", security = @SecurityRequirement(name="bearer"))
     public ResponseEntity<Map<String, Object>> getCustomer(@Parameter(name="id", description="테스트ID : SIG0000010") @PathVariable String id) {
         Map<String, Object> searchInfo = new HashMap<>();
@@ -61,7 +62,7 @@ public class CustomerController {
     }
     
     
-    @PostMapping("/customers/{id}")
+    @PostMapping("/create")
     @Operation(summary = "고객정보수정", description="고객 정보수정")
     public Map<String, Object> updateCustomer(@RequestBody Map<String, Object> paramMap) {
         

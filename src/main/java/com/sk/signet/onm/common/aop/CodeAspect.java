@@ -89,16 +89,22 @@ public class CodeAspect {
         
         int status = returnObj.getStatusCodeValue();
         int retCode = 1000;
-        data.put("message", "");
+        data.put("message", "성공");
         
         if(status == 200) {
             retCode = 1000;
         } else if(status == 400){
-            retCode = 5100;
-            data.put("message", data.get("error"));
+            retCode = 5400;
+            data.put("message", "잘못된 API 요청입니다.");
         } else if(status == 404){
-            retCode = 4400;
-            data.put("message", data.get("error"));
+            retCode = 5404;
+            data.put("message", "요청한 API를 찾을 수 없습니다.");
+        } else if(status == 405){
+            retCode = 5405;
+            data.put("message", "API 접근방법이 올바르지 않습니다.");
+        } else if(status == 415){
+            retCode = 5415;
+            data.put("message", "서버에서 처리할 수 없는 요청입니다.");
         } else {
             retCode = 9999;
             data.put("message", data.get("error"));
@@ -107,6 +113,7 @@ public class CodeAspect {
         data.put("status", status);
         data.put("code", retCode);
         log.debug("returnBody : {}", returnObj.getBody());
+        log.debug("status:{}", returnObj.getStatusCodeValue());
 
     }
     
